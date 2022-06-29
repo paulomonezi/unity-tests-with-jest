@@ -5,13 +5,12 @@ const calculateOrderValue = order => {
 
   const delivery = order.items.filter(item => item.delivery);
 
-  if (productValue > 500) {
-    return productValue;
+  if(order.state === 'MT' || order.state ==='MS'){
+    const extraCharge = delivery[0].value * 0.2;
+    delivery[0].value += extraCharge;
   }
-  else {
-    return productValue + delivery[0].value;
-  }
-}
 
+  return (productValue > 500) ? productValue : productValue + delivery[0].value
+}
 
 module.exports = calculateOrderValue;
