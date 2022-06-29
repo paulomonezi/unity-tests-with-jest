@@ -1,3 +1,5 @@
+const extraChargePercentage = 0.2
+
 const calculateOrderValue = order => {
   const productValue = order.items
     .filter(item => !item.delivery)
@@ -6,7 +8,7 @@ const calculateOrderValue = order => {
   const delivery = order.items.filter(item => item.delivery);
 
   if(order.state === 'MT' || order.state ==='MS'){
-    const extraCharge = delivery[0].value * 0.2;
+    const extraCharge = delivery[0].value * extraChargePercentage;
     delivery[0].value += extraCharge;
   }
 

@@ -54,3 +54,16 @@ it("Must charge extra 20% on delivery expenses if the order its from MS state", 
 
   expect(result).toBe(320);
 })
+
+it("Don't charge any extra delivery expenses if the order its from SP state", () => {
+  const myOrderOnSP = {
+    state: 'SP',
+    items: [
+      { name: 'Giant Axe', value: 200 },
+      { name: 'Delivery', value: 100, delivery: true }
+    ]
+  };
+  const result = calculateOrderValue(myOrderOnSP);
+
+  expect(result).toBe(300);
+})
